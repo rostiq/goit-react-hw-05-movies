@@ -1,49 +1,28 @@
-import play from "./play.png";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Home } from './Home/Home';
+import { Movies } from './Movies/Movies';
+import { Layout } from './Layout/Layout';
+import { MovieDetails } from './MovieDetails/MovieDetails';
+import { Cast } from './Cast/Cast';
+import { Review } from './Review/Review';
+
+
 
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      <h1>
-        Movielist
-      </h1>
-      <img src={play} alt="play" width="160"/>
-      <p>
-        easy and fast app for creating movie's playlists
-      </p>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Home/>}/>
+          <Route path="movies" element={<Movies/>}/>
+          <Route path="movies/:movieId" element={<MovieDetails/>}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="review" element={<Review />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<Home/>} ></Route>
+      </Routes>
+    </>
   );
 };
-
-//how insert image to img?
-// {}
-
-// <img src={"./logo.jpeg"} />
-
-// <img src={require('./logo.jpeg')} />
-
-// import logo from './logo.jpeg'; // with import
-
-// const logo = require('./logo.jpeg); // with require
-
-// <img src={logo} />
-
-// .
-
-// <img src={require('./one.jpeg')} />
-
-// <img src={require('./logo.jpeg').default} />
-
-
-
-//Source: https://stackoverflow.com/questions/39999367
-
-
