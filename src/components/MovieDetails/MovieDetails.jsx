@@ -2,17 +2,26 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { movieIdApi } from 'components/Services/API';
 import { useEffect, useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Wrapper, GetBackBtn } from './MovieDetails.styled'
+import { Styled } from 'components/Layout/Layout.styled';
+import noimage from "../../images/noimage.jpeg";
+
+
+
 
 export const MovieDetails = () => {
     const { movieId } = useParams();
     const [movieData, setMovieData] = useState({});
+    const location = useLocation();
+    const backLinkHref = location.state?.from ?? "/";
 
-    useEffect(()=>{
+    useEffect(() => {
         movieIdApi(movieId).then(setMovieData);
-    },[movieId]);
+    }, [movieId]);
 
-    const { 
+    const {
         title, poster_path, vote_average, overview, release_date
     } = movieData;
 
@@ -22,41 +31,45 @@ export const MovieDetails = () => {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
-        });
+    });
 
     return (
-        <>
-            <button type="button" style={{margin: '1rem'}}>get back</button>
+        <Wrapper>
+            <GetBackBtn to={backLinkHref}>get back</GetBackBtn>
             {movieData && <div style={{
                 display: 'flex',
-                flexBasis: '50%',
-                gap: '4vw',
+                gap: '1rem',
+                justifyContent: "center",
+                alignItems: "flex-start",
+                marginTop: "1rem"
             }}>
                 <div style={{
-                    width: '30vw',
-
-                }}>
-                    <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title} />
-                </div>
-                <div>
-                <div>
-                    <p style={{
-                        fontWeight: '900'
-                    }}>{title}</p><p>release: {formattedDate}</p>
-                    <p>rate: {vote_average}</p>
-                    <p>{overview || 'No desrition yet'}</p>
-                </div>
-                
-                <div style={{
                     display: 'flex',
-                    gap: '4vw',
+                    flexShrink: 0,
+                    width: '25vw'
                 }}>
-                <Link to="cast">Cast</Link>
-                <Link to="review">Review</Link>
+                    <img src={poster_path
+                        ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                        : noimage} alt={title} />
                 </div>
-                <Outlet/>
+                <div>
+                    <div>
+                        <span>{title}</span>
+                        <p>release: {formattedDate}</p>
+                        <p>rate: {vote_average}</p>
+                        <p>{overview || 'No desrition yet'}</p>
+                    </div>
+
+                    <div style={{
+                        display: 'flex',
+                        gap: '4vw',
+                    }}>
+                        <Styled to="cast">cast</Styled>
+                        <Styled to="review">review</Styled>
+                    </div>
+                    <Outlet />
                 </div>
             </div>}
-        </>
+        </Wrapper>
     )
 }

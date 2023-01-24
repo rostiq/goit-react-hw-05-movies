@@ -1,6 +1,7 @@
 
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Styled } from './Layout.styled'
 
 export const Layout = () => {
     return (
@@ -11,12 +12,13 @@ export const Layout = () => {
                 padding: "1rem",
                 margin: "1rem",
 
-      }}>
-                <Link to="/">Home</Link>
-                <Link to="/movies">Movies</Link>
+            }}>
+                <Styled to="/">home</Styled>
+                <Styled to="/movies">movies</Styled>
             </nav>
-            <Outlet/>
-        </>     
-);};
+            <Outlet />
+        </>
+    );
+};
 
 
