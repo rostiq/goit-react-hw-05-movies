@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home } from './Home/Home';
 import { Movies } from './Movies/Movies';
 import { Layout } from './Layout/Layout';
@@ -11,7 +11,6 @@ import { Review } from './Review/Review';
 
 export const App = () => {
   return (
-    <>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -21,8 +20,7 @@ export const App = () => {
             <Route path="review" element={<Review />} />
           </Route>
         </Route>
-        <Route path="*" element={<Home />} ></Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </>
   );
 };
