@@ -4,7 +4,7 @@ import { movieReviewApi } from "components/Services/API";
 import { useState, useEffect } from "react";
 
 
-export const Review = () => {
+const Review = () => {
     const { movieId } = useParams();
     const [rewievs, setRewiev] = useState([]);
 
@@ -13,8 +13,6 @@ export const Review = () => {
             setRewiev(response.data.results);
         });
     }, [movieId]);
-
-    console.log(rewievs);
 
     if (rewievs.length === 0) {
         return (
@@ -41,3 +39,4 @@ export const Review = () => {
     )
 };
 
+export default Review;

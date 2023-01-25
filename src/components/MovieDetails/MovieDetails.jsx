@@ -1,4 +1,4 @@
-import React from "react";
+import { Suspense } from "react";
 import { useParams } from "react-router-dom";
 import { movieIdApi } from 'components/Services/API';
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import noimage from "../../images/noimage.jpeg";
 
 
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
     const { movieId } = useParams();
     const [movieData, setMovieData] = useState({});
     const location = useLocation();
@@ -24,8 +24,6 @@ export const MovieDetails = () => {
     const {
         title, poster_path, vote_average, overview, release_date
     } = movieData;
-
-    console.log(title);
 
     const formattedDate = new Date(release_date).toLocaleDateString("en-US", {
         year: 'numeric',
@@ -67,9 +65,13 @@ export const MovieDetails = () => {
                         <Styled to="cast">cast</Styled>
                         <Styled to="review">review</Styled>
                     </div>
-                    <Outlet />
+                    <Suspense fallback={<p>loading...</p>}>
+                        <Outlet />
+                    </Suspense>
                 </div>
             </div>}
         </Wrapper>
     )
 }
+
+export default MovieDetails;

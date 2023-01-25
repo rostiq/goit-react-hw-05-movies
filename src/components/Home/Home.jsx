@@ -2,9 +2,9 @@ import React from 'react';
 import { trendingApi } from 'components/Services/API';
 import { useState, useEffect } from 'react';
 import { Wrapper } from 'components/MovieDetails/MovieDetails.styled';
-import {StyledList} from './Home.styled'
+import { StyledList } from './Home.styled'
 
-export const Home = () => {
+const Home = () => {
     const [trending, setTrending] = useState([]);
 
     useEffect(() => {
@@ -12,24 +12,26 @@ export const Home = () => {
     }, [])
 
     return (
-        <>
-            <Wrapper>
-            <h2>
-                Trending today
-            </h2>
-            <ul>
-                {trending.map(({ id, title }) => (
-                    <li key={id}>
-                        <StyledList to={`/movies/${id}`} state={{ from: "/" }}>
-                            {title}
-                        </StyledList >
-                    </li>
-                ))
-                }
-            </ul>
-            </Wrapper>
+        <Wrapper>
+            <>
+                <h2>
+                    Trending today
+                </h2>
+                <ul>
+                    {trending.map(({ id, title }) => (
+                        <li key={id}>
+                            <StyledList to={`/movies/${id}`} state={{ from: "/" }}>
+                                {title}
+                            </StyledList >
+                        </li>
+                    ))
+                    }
+                </ul>
+            </>
+        </Wrapper>
 
-        </>
     )
 };
 
+
+export default Home;

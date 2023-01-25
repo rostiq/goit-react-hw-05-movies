@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import noimage from "../../images/noimage.jpeg";
 
 
-export const Cast = () => {
+const Cast = () => {
     const { movieId } = useParams();
     const [credits, setCredits] = useState([]);
 
@@ -14,8 +14,6 @@ export const Cast = () => {
             setCredits(response.data.cast);
         });
     }, [movieId]);
-
-    console.log(credits);
 
     if (credits.length === 0) {
         return (
@@ -44,3 +42,4 @@ export const Cast = () => {
     )
 };
 
+export default Cast;

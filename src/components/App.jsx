@@ -1,16 +1,16 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Home } from './Home/Home';
-import { Movies } from './Movies/Movies';
+import { Routes, Route } from 'react-router-dom';
 import { Layout } from './Layout/Layout';
-import { MovieDetails } from './MovieDetails/MovieDetails';
-import { Cast } from './Cast/Cast';
-import { Review } from './Review/Review';
-
-
+import { lazy, Suspense } from "react";
+const Home = lazy(() => import('./Home/Home'));
+const Movies = lazy(() => import('./Movies/Movies'));
+const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
+const Cast = lazy(() => import('./Cast/Cast'));
+const Review = lazy(() => import('./Review/Review'));
 
 export const App = () => {
   return (
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -20,7 +20,10 @@ export const App = () => {
             <Route path="review" element={<Review />} />
           </Route>
         </Route>
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Layout />} />
       </Routes>
+    </Suspense>
   );
 };
+
+

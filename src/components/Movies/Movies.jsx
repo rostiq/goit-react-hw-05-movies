@@ -8,7 +8,7 @@ import {StyledList} from 'components/Home/Home.styled'
 
 
 
-export const Movies = () => {
+const Movies = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("query");
     const [queryData, setQueryData] = useState(null);
@@ -52,3 +52,6 @@ export const Movies = () => {
         </>
     );
 }
+
+export default Movies;
+
