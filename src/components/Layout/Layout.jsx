@@ -13,7 +13,7 @@ export const Layout = () => {
                 margin: "1rem",
 
             }}>
-                <Styled to="/" end >home</Styled>
+                <Styled to="/">home</Styled>
                 <Styled to="/movies">movies</Styled>
             </nav>
             <Outlet />
