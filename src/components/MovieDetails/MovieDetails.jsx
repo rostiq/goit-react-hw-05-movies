@@ -15,7 +15,7 @@ const MovieDetails = () => {
     const { movieId } = useParams();
     const [movieData, setMovieData] = useState({});
     const location = useLocation();
-    const backLinkHref = location.state?.from ?? "/";
+    const backLinkHref = location.state?.from;
 
     useEffect(() => {
         movieIdApi(movieId).then(setMovieData);
@@ -62,8 +62,8 @@ const MovieDetails = () => {
                             display: 'flex',
                             gap: '4vw',
                         }}>
-                            <Styled to="cast">cast</Styled>
-                            <Styled to="review">review</Styled>
+                            <Styled to="cast" state={{from: location.state?.from}}>cast</Styled>
+                            <Styled to="review" state={{from: location.state?.from}}>review</Styled>
                         </div>
                         <Suspense fallback={<p>loading...</p>}>
                             <Outlet />
